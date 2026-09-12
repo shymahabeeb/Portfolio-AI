@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX Audits & Conversion Redesigns | Shyma Habeeb</title>
+  <style>
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --border-color: #30363d;
+      --text-main: #c9d1d9;
+      --text-heading: #ffffff;
+      --defect-red: #f85149;
+      --solution-green: #3fb950;
+      --accent-blue: #58a6ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* Navigation Back Button */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Intro Section */
+    .intro { margin-bottom: 32px; text-align: left; }
+    .intro h1 { font-size: 2rem; color: var(--text-heading); margin-bottom: 8px; }
+    .intro p { font-size: 1.05rem; color: #8b949e; max-width: 800px; }
+
+    /* Project Tabs */
+    .tab-switcher {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-blue);
+    }
+
+    /* Showcase Layout */
+    .project-view { display: none; }
+    .project-view.active { display: block; }
+
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .wireframe-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .wireframe-card.defect { border-top: 4px solid var(--defect-red); }
+    .wireframe-card.solution { border-top: 4px solid var(--solution-green); }
+
+    .card-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+    .defect .card-title { color: var(--defect-red); }
+    .solution .card-title { color: var(--solution-green); }
+
+    /* Wireframe UI Mocks */
+    .mock-header {
+      height: 36px;
+      background: #21262d;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      position: relative;
+    }
+    .mock-hero {
+      background: #21262d;
+      border-radius: 6px;
+      padding: 16px;
+      min-height: 220px;
+      position: relative;
+    }
+
+    .mock-split {
+      display: grid;
+      grid-template-columns: 38% 58%;
+      gap: 4%;
+    }
+
+    .mock-box { background: #30363d; border-radius: 4px; }
+    .mock-text-line {
+      height: 8px;
+      background: #30363d;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .mock-btn {
+      height: 32px;
+      background: var(--accent-blue);
+      border-radius: 4px;
+      width: 120px;
+      margin-top: 12px;
+    }
+
+    /* Hotspot Pins */
+    .pin {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pin:hover, .pin.highlighted {
+      transform: scale(1.25);
+    }
+
+    .pin-red { background: var(--defect-red); box-shadow: 0 0 8px rgba(248, 81, 73, 0.6); }
+    .pin-green { background: var(--solution-green); box-shadow: 0 0 8px rgba(63, 185, 80, 0.6); }
+
+    /* Tooltip Callout Box */
+    .tooltip-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 70px;
+    }
+
+    .tooltip-content { display: none; }
+    .tooltip-content.active { display: block; }
+    .tooltip-content h4 { color: var(--text-heading); font-size: 0.95rem; margin-bottom: 4px; }
+    .tooltip-content p { font-size: 0.9rem; color: var(--text-main); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Back Link -->
+  <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+
+  <!-- Header -->
+  <header class="intro">
+    <h1>UX Audits & Conversion-First Redesigns</h1>
+    <p>Transforming visual friction into measurable conversion lifts. Hover over any numbered pin on either canvas to trace UX defects directly to their structural wireframe solution.</p>
+  </header>
+
+  <!-- Project Switcher Tabs -->
+  <div class="tab-switcher">
+    <button class="tab-btn active" onclick="switchProject('p1')">Project 1: Event Registration</button>
+    <button class="tab-btn" onclick="switchProject('p2')">Project 2: Enterprise Tech</button>
+  </div>
+
+  <!-- PROJECT 1 -->
+  <div id="p1" class="project-view active">
+    <div class="canvas-grid">
+      <div class="wireframe-card defect">
+        <div class="card-title">Current Layout (Defect Map)</div>
+        <div class="mock-header">
+          <div class="mock-box" style="width: 50px; height: 12px;"></div>
+          <div class="mock-box" style="width: 140px; height: 10px;"></div>
+          <div class="pin pin-red" style="right: 10px; top: 6px;" data-target="p1-pin1">1</div>
+        </div>
+        <div class="mock-hero">
+          <div class="mock-text-line" style="width: 70%;"></div>
+          <div class="mock-text-line" style="width: 90%;"></div>
+          <div class="mock-text-line" style="width: 85%;"></div>
+          <div class="mock-text-line" style="width: 40%;"></div>
+          <div class="pin pin-red" style="left: 20px; bottom: 40px;" data-target="p1-pin2">2</div>
+          <div class="mock-btn" style="opacity: 0.3; margin-top: 40px;"></div>
+        </div>
+      </div>
+
+      <div class="wireframe-card solution">
+        <div class="card-title">Redesigned Solution (Wireframe)</div>
+        <div class="mock-header">
+          <div class="mock-box" style="width: 50px; height: 12px;"></div>
+          <div class="mock-box" style="width: 60px; height: 10px;"></div>
+          <div class="pin pin-green" style="right: 10px; top: 6px;" data-target="p1-pin1">1</div>
+        </div>
+        <div class="mock-hero mock-split">
+          <div class="mock-box" style="height: 100%; min-height: 140px;"></div>
+          <div style="position: relative;">
+            <div class="mock-text-line" style="width: 50%;"></div>
+            <div class="mock-text-line" style="width: 90%;"></div>
+            <div class="mock-btn"></div>
+            <div class="pin pin-green" style="right: 10px; bottom: 10px;" data-target="p1-pin2">2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tooltip-container">
+      <div id="p1-default" class="tooltip-content active">
+        <p><em>Hover over pin 1 or 2 to reveal problem analysis and wireframe design solutions.</em></p>
+      </div>
+      <div id="p1-pin1" class="tooltip-content">
+        <h4>Pin 1: Top Navigation Friction</h4>
+        <p><strong>Defect:</strong> External links invite user drop-off before reading event details.<br><strong>Solution:</strong> Enclosed funnel header—stripped top links to retain 100% user focus on registration.</p>
+      </div>
+      <div id="p1-pin2" class="tooltip-content">
+        <h4>Pin 2: CTA Placement & Visual Hierarchy</h4>
+        <p><strong>Defect:</strong> Primary conversion button buried 800px down beneath single-column body text.<br><strong>Solution:</strong> Asymmetric 38/62 split hero with media proof and high-contrast CTA above the fold.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT 2 -->
+  <div id="p2" class="project-view">
+    <div class="canvas-grid">
+      <div class="wireframe-card defect">
+        <div class="card-title">Current Layout (Defect Map)</div>
+        <div class="mock-hero">
+          <div class="mock-text-line" style="width: 80%;"></div>
+          <div class="mock-text-line" style="width: 60%;"></div>
+          <div class="pin pin-red" style="left: 20px; top: 30px;" data-target="p2-pin1">1</div>
+        </div>
+      </div>
+
+      <div class="wireframe-card solution">
+        <div class="card-title">Redesigned Solution (Wireframe)</div>
+        <div class="mock-hero">
+          <div class="mock-text-line" style="width: 40%; background: var(--accent-blue);"></div>
+          <div class="mock-text-line" style="width: 85%;"></div>
+          <div class="mock-btn"></div>
+          <div class="pin pin-green" style="right: 20px; top: 30px;" data-target="p2-pin1">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tooltip-container">
+      <div id="p2-default" class="tooltip-content active">
+        <p><em>Hover over pin 1 to inspect enterprise messaging structural fixes.</em></p>
+      </div>
+      <div id="p2-pin1" class="tooltip-content">
+        <h4>Pin 1: Messaging Clarity & Primary Hook</h4>
+        <p><strong>Defect:</strong> Abstract headline with no clear benefit statement or lead action.<br><strong>Solution:</strong> Added category kicker, concise value statement, and direct dual CTAs.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchProject(projectId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.project-view').forEach(view => view.classList.remove('active'));
+
+    event.target.classList.add('active');
+    document.getElementById(projectId).classList.add('active');
+  }
+
+  document.querySelectorAll('.pin').forEach(pin => {
+    pin.addEventListener('mouseenter', (e) => {
+      const targetId = e.target.getAttribute('data-target');
+      const parentView = e.target.closest('.project-view');
+
+      parentView.querySelectorAll(`[data-target="${targetId}"]`).forEach(p => p.classList.add('highlighted'));
+      parentView.querySelectorAll('.tooltip-content').forEach(tc => tc.classList.remove('active'));
+      const activeTooltip = parentView.querySelector(`#${targetId}`);
+      if (activeTooltip) activeTooltip.classList.add('active');
+    });
+
+    pin.addEventListener('mouseleave', (e) => {
+      const targetId = e.target.getAttribute('data-target');
+      const parentView = e.target.closest('.project-view');
+
+      parentView.querySelectorAll(`[data-target="${targetId}"]`).forEach(p => p.classList.remove('highlighted'));
+      parentView.querySelectorAll('.tooltip-content').forEach(tc => tc.classList.remove('active'));
+      const defaultTooltip = parentView.querySelector('[id$="-default"]');
+      if (defaultTooltip) defaultTooltip.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
