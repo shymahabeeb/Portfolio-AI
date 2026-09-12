@@ -43,6 +43,45 @@
             margin: 0 auto;
         }
 
+        /* TOP GLOBAL NAVIGATION BAR */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand-logo {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-blue);
+        }
+
         /* HEADER & HERO */
         header {
             background: var(--bg-card);
@@ -280,6 +319,11 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            .top-navbar {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
         }
 
         /* SKILL MATRIX TABLE */
@@ -320,6 +364,17 @@
 <body>
 
 <div class="container">
+
+    <!-- TOP GLOBAL NAVIGATION BAR -->
+    <nav class="top-navbar">
+        <a href="index.html" class="brand-logo">Shyma Habeeb</a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="mockup-1.html">Mockup 1</a></li>
+            <li><a href="mockup-2.html">Mockup 2</a></li>
+            <li><a href="mailto:shyma.habeeb@gmail.com">Contact</a></li>
+        </ul>
+    </nav>
 
     <!-- HEADER & HERO SECTION -->
     <header>
@@ -610,8 +665,18 @@
         }
         
         document.getElementById(tabName).classList.add("active");
-        evt.currentTarget.classList.add("active");
+        if (evt && evt.currentTarget) {
+            evt.currentTarget.classList.add("active");
+        }
     }
+
+    // Auto-initialize first tab on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        var firstTabBtn = document.querySelector(".tab-btn");
+        if (firstTabBtn) {
+            firstTabBtn.click();
+        }
+    });
 </script>
 
 </body>
