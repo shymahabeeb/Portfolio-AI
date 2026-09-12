@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shyma Habeeb | Lead Product Content & Design | AI Operations Strategy</title>
+    <style>
+        /* CSS RESET & DESIGN SYSTEM TOKENS */
+        :root {
+            --bg-main: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --accent-blue: #2563EB;
+            --accent-hover: #1D4ED8;
+            --border-color: #E2E8F0;
+            --badge-bg: #EFF6FF;
+            --badge-text: #1E40AF;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --max-width: 1100px;
+            --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            line-height: 1.6;
+            padding: 24px 16px 60px 16px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* HEADER & HERO */
+        header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .title-group h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .title-group p {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-top: 4px;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: white;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-main);
+        }
+
+        .hero-summary {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 900px;
+            margin-bottom: 24px;
+        }
+
+        /* METRICS CALLOUT GRID */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .metric-card {
+            background-color: var(--bg-main);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* TAB NAVIGATION */
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            background-color: var(--bg-card);
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: 24px;
+            overflow-x: auto;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 18px;
+            font-family: var(--font-stack);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-main);
+        }
+
+        .tab-btn.active {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+
+        /* TAB CONTENT PANELS */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* CARDS & LAYOUT UNIFORMITY */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid #DBEAFE;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .card-body p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .card-body ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .card-body li {
+            margin-bottom: 8px;
+        }
+
+        /* STEP-BY-STEP WORKFLOW BOXES */
+        .workflow-box {
+            background-color: var(--bg-main);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .workflow-box strong {
+            color: var(--accent-blue);
+        }
+
+        /* GRID FOR WEB PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* SKILL MATRIX TABLE */
+        .skill-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        .skill-table th, .skill-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .skill-table th {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .skill-table td {
+            color: var(--text-secondary);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 32px 0 16px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER & HERO SECTION -->
+    <header>
+        <div class="header-top">
+            <div class="title-group">
+                <h1>Shyma Habeeb</h1>
+                <p>Lead Product Content & Design | AI Operations Strategy</p>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:shyma.habeeb@gmail.com" class="btn btn-primary">Email Me</a>
+                <a href="https://linkedin.com/in/shymahabeeb" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+            </div>
+        </div>
+
+        <p class="hero-summary">
+            14+ years bridging end-to-end product feature design, sprint execution, data-driven user flows, and prompt-engineered web deployment. Proven track record of translating C-suite vision into lo-fi/hi-fi wireframes, technical PRDs, self-optimizing growth engines, and frictionless onboarding systems.
+        </p>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">+85% Completion</div>
+                <div class="metric-label">Redesigned PLG self-serve onboarding, cutting friction from 2 mins to &lt;30 secs.</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">100% Sprint Delivery</div>
+                <div class="metric-label">Owned feature design, wireframing, PRDs, and tech handover across consecutive sprints.</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">#1 Search Ranking</div>
+                <div class="metric-label">Engineered automated, self-optimizing SEO writer and auditor agents for target keywords.</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">Prompt-Driven CI/CD</div>
+                <div class="metric-label">Deployed live Astro builds connected to GitHub repositories and AWS-hosted APIs.</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'product-design')">Product Design & Sprint Ownership</button>
+        <button class="tab-btn" onclick="openTab(event, 'web-projects')">Featured Web Projects</button>
+        <button class="tab-btn" onclick="openTab(event, 'growth-engineering')">Growth Systems Architecture</button>
+        <button class="tab-btn" onclick="openTab(event, 'ai-operations')">AI Operations & Automation</button>
+        <button class="tab-btn" onclick="openTab(event, 'about')">About & Master Skills</button>
+    </nav>
+
+    <!-- TAB 1: PRODUCT DESIGN & SPRINT OWNERSHIP -->
+    <div id="product-design" class="tab-content active">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Full Lifecycle Product Feature Design & Engineering Negotiation</h2>
+                <span class="badge">Core Case Study</span>
+            </div>
+            <div class="card-subtitle">Role: Lead Product Designer & Product Owner | Platform Feature Delivery</div>
+            <div class="card-body">
+                <p>Owned the end-to-end design and execution cycle for core platform features. Acted as the direct bridge between executive vision, user feedback, design execution, and engineering deployment.</p>
+                
+                <div class="workflow-box">
+                    <strong>End-to-End Design & Development Lifecycle:</strong><br>
+                    Customer Needs & Metrics ➔ Lo-Fi / Hi-Fi Figma Wireframing ➔ PRD Creation ➔ Tech Handover ➔ Engineering Build ➔ Release Notes & Retrospective ➔ CTO Negotiation
+                </div>
+
+                <ul>
+                    <li><strong>Ideation & UX Wireframing:</strong> Synthesized customer requirements and user performance data into functional feature concepts. Built initial lo-fi mockups in Google Slides and refined hi-fi prototypes and visual assets in Figma.</li>
+                    <li><strong>PRD Generation:</strong> Wrote detailed Product Requirement Documents (PRDs) across consecutive development sprints, detailing functional specifications, user journeys, microcopy, and UI guidelines.</li>
+                    <li><strong>Engineering Collaboration & Tech Handover:</strong> Conducted detailed handovers with the CTO and developer team. Engineering translated the PRDs into technical task breakdowns and backend/frontend builds.</li>
+                    <li><strong>Sprint Catch-ups & CTO Negotiations:</strong> Managed post-release sprint meetings with engineering. Directly negotiated upcoming sprint backlogs with the CTO based on real-time product analytics, business needs, and industry trends.</li>
+                    <li><strong>Public Release Communication:</strong> Transformed technical release notes into user-facing release announcements and feature-focused blog content to drive adoption.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Product-Led Growth (PLG) Onboarding & "Align" Panel</h2>
+                <span class="badge">UX Optimization</span>
+            </div>
+            <div class="card-body">
+                <p>Identified post-signup inactivity by analyzing user sessions via MS Clarity and internal dashboards. Re-engineered the self-serve onboarding model to reduce drop-offs.</p>
+                <ul>
+                    <li><strong>Signup Friction Reduction:</strong> Wireframed and launched a 2-field signup flow, reducing onboarding steps from 10+ clicks (2 minutes) to 4 clicks (&lt;30 seconds). Signup completion jumped from ~35% to ~65%.</li>
+                    <li><strong>In-Platform Contextual Orientation ("Align"):</strong> Designed and wrote copy for "Align", an embedded contextual guidance panel that replaced an overly heavy 100-step platform tour, stabilizing early drop-off rates.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: FEATURED WEB PROJECTS -->
+    <div id="web-projects" class="tab-content">
+        <div class="projects-grid">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Live Production Build — Astro & GitHub Site</h3>
+                    <span class="badge">Live Web App</span>
+                </div>
+                <div class="card-subtitle">Tech Stack: Astro, Claude (Prompt-Driven), GitHub CI/CD</div>
+                <div class="card-body">
+                    <p>Managed the deployment of a live Astro-based client website. Orchestrated layout updates, content structure, and design tweaks via Claude prompts linked directly to the client's GitHub repository.</p>
+                    <a href="#" target="_blank" class="btn btn-secondary">🌐 View Live Production Site</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Live Build — Astro Site with AWS API Integration</h3>
+                    <span class="badge">Live Web App</span>
+                </div>
+                <div class="card-subtitle">Tech Stack: Astro, Claude, AWS API Backend, GitHub CI/CD</div>
+                <div class="card-body">
+                    <p>Delivered a production site with a custom lead-capture contact popup. Connected the frontend UI to an Amazon-hosted backend API via Claude prompts, including an automated email template pipeline.</p>
+                    <a href="#" target="_blank" class="btn btn-secondary">🌐 View Live Production Site</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Interactive Mockup — Upcoming Line-of-Business Expansion</h3>
+                    <span class="badge">Interactive Demo</span>
+                </div>
+                <div class="card-subtitle">Tech Stack: HTML/Astro, Vercel Hosting</div>
+                <div class="card-body">
+                    <p>Designed and hosted an interactive prototype for an upcoming client business expansion line. Formulated the information architecture, navigation, and user flow prior to backend engineering.</p>
+                    <a href="mockup-1.html" class="btn btn-primary">🌐 View Interactive Mockup Demo</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Interactive Mockup — Landing Page Redesign</h3>
+                    <span class="badge">Interactive Demo</span>
+                </div>
+                <div class="card-subtitle">Tech Stack: HTML/Astro, MS Clarity Insights, Vercel Hosting</div>
+                <div class="card-body">
+                    <p>Re-engineered a client landing page to resolve high drop-off rates. Streamlined value messaging, simplified CTAs, and optimized mobile layout into a clean, clickable prototype.</p>
+                    <a href="mockup-2.html" class="btn btn-primary">🌐 View Interactive Prototype</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TAB 3: GROWTH SYSTEMS ARCHITECTURE -->
+    <div id="growth-engineering" class="tab-content">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">End-to-End Growth Engineering Framework</h2>
+                <span class="badge">Framework Design</span>
+            </div>
+            <div class="card-body">
+                <p>Architected a standardized growth engineering execution model that turns initial business audits into systematic, predictable traffic and lead channels.</p>
+                
+                <div class="workflow-box">
+                    <strong>Growth Engineering Sequence:</strong><br>
+                    Audit Artifact Gathering ➔ Competitor Playbook Analysis ➔ Semrush Keyword Research ➔ Content Calendar ➔ Dual-Agent Execution ➔ Rank Monitoring
+                </div>
+
+                <ul>
+                    <li><strong>Audit Artifact Coordination:</strong> Gathered and structured foundational assets following business audits conducted by the CEO, establishing baseline messaging and target positioning.</li>
+                    <li><strong>Competitor Benchmarking Playbook:</strong> Executed competitive audits using standardized playbooks to map topic gaps and keyword opportunities in Semrush.</li>
+                    <li><strong>Content Operations & Calendaring:</strong> Structured topic clusters and editorial schedules aligned with product updates and target user search intent.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Self-Optimizing SEO Pipeline (Writer + Auditor AI Agents)</h2>
+                <span class="badge">SEO Impact Case Study</span>
+            </div>
+            <div class="card-body">
+                <p>Created a dual-agent content pipeline that translates keyword strategy into high-ranking content while continuously elevating quality based on client feedback.</p>
+                <ul>
+                    <li><strong>Dual-Agent Workflow:</strong> Built a <i>Writer Agent</i> to generate drafts from keyword research and an <i>Auditor Agent</i> to evaluate drafts against strict brand, formatting, and SEO guidelines.</li>
+                    <li><strong>Iterative Feedback Loop:</strong> Client feedback and batch scores automatically update underlying rulebooks and agent skills, ensuring every subsequent release exceeds previous quality baselines.</li>
+                    <li><strong>Proven Impact:</strong> Secured a <strong>#1 Google ranking</strong> for a target primary keyword and significantly increased overall domain search visibility.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: AI OPERATIONS & AUTOMATION -->
+    <div id="ai-operations" class="tab-content">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Operations Management via AI Delivery Console</h2>
+                <span class="badge">AI Operations</span>
+            </div>
+            <div class="card-body">
+                <p>Managed client entities inside a proprietary AI delivery console, bridging unstructured communication into actionable execution backlogs.</p>
+                <ul>
+                    <li><strong>Data Yielding & Task Extraction:</strong> Processed raw client meeting notes and conversation yields into structured CSVs to import action items directly into execution platforms.</li>
+                    <li><strong>Weekly Priority Automation:</strong> Prompted Claude to scan multi-channel inputs (inbox, meeting yields, task notes) to automatically generate prioritized weekly work items.</li>
+                    <li><strong>Report Playbook Engineering:</strong> Authored a standardized playbook that converts internal task logs into client-facing performance reports delivered via the console.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Custom AI Agents & Automated Workflows</h2>
+                <span class="badge">Agent Workflows</span>
+            </div>
+            <div class="card-body">
+                <p>Designed custom AI skills and automated pipelines in Claude and Gemini to eliminate manual reporting overhead.</p>
+                <ul>
+                    <li><strong>ARA (Ad Report Agent):</strong> Built an automated agent that ingests daily advertising data and generates formatted performance summaries directly to email drafts.</li>
+                    <li><strong>Data Analytics Pipelines:</strong> Automated daily user signup analytics by combining MS Clarity, Google Ads, and internal dashboard logs via custom prompts.</li>
+                    <li><strong>Multimedia Production:</strong> Scripted and produced AI avatar product videos using HeyGen and designed social carousels for multi-channel publishing.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: ABOUT & MASTER SKILLS -->
+    <div id="about" class="tab-content">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Professional Background & Leadership Approach</h2>
+            </div>
+            <div class="card-body">
+                <p>I operate at the convergence of <strong>Product Design, Technical Execution, and AI Operations</strong>. Over my 14-year career, I have reported directly to CEOs and Founders, acted as the primary bridge between executive vision and technical implementation, and driven organizational pivots.</p>
+                <p>Whether wireframing platform features, negotiating sprint backlogs with CTOs, or building self-optimizing AI agent workflows, my focus remains constant: eliminating friction for users and engineering sustainable, efficient operational systems.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Master Skill Matrix</h2>
+            </div>
+            <div class="card-body">
+                <table class="skill-table">
+                    <thead>
+                        <tr>
+                            <th>Vertical</th>
+                            <th>Core Competencies</th>
+                            <th>Primary Toolkit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Product Design & Ownership</strong></td>
+                            <td>Wireframing (Lo-Fi/Hi-Fi), PRDs, Sprint Backlog Management, User Flow Optimization, Competitor Audits</td>
+                            <td>Figma, Google Slides, BetterDocs, WordPress, MS Clarity, Google Ads</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Operations & Growth</strong></td>
+                            <td>Multi-Agent Prompting, RAG Workflows, Automated Content Engines, Growth Playbooks, Rulebooks</td>
+                            <td>Claude (Anthropic), Gemini (Google), ChatGPT, HeyGen</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical Orchestration</strong></td>
+                            <td>Prompt-Driven Development, CI/CD Deployment Pipelines, API Integration, Info Architecture</td>
+                            <td>Astro, GitHub, Vercel/Netlify, AWS API Integration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Leadership & Operations</strong></td>
+                            <td>Direct Client Management, Cross-Functional Team Mentorship, Executive Alignment, Product Operations</td>
+                            <td>Monday.com, Trello, Basecamp, Zoho CRM, AI Delivery Console</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Shyma Habeeb. Designed & Built for Clean Modern Web Performance.</p>
+    </footer>
+
+</div>
+
+<!-- INTERACTIVE TAB JAVASCRIPT -->
+<script>
+    function openTab(evt, tabName) {
+        var i, tabContent, tabBtns;
+        
+        tabContent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabContent.length; i++) {
+            tabContent[i].classList.remove("active");
+        }
+        
+        tabBtns = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tabBtns.length; i++) {
+            tabBtns[i].classList.remove("active");
+        }
+        
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
